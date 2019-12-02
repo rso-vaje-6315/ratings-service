@@ -20,8 +20,8 @@ public class RatingEntity extends BaseEntity {
     @Column(name = "rating_number")
     private int ratingNumber;
 
-    @Column(name = "comments")
-    private List<Comment> comments;
+//    @Column(name = "comments")
+//    private List<Comment> comments;
 
     public String getProductId() {
         return productId;
@@ -39,11 +39,11 @@ public class RatingEntity extends BaseEntity {
         this.ratingNumber = ratingNumber;
     }
 
-    public List<Comment> getComments() {
-        return comments;
-    }
-
-    public void setComments(List<Comment> comments) {
-        this.comments = comments;
-    }
+//    public List<Comment> getComments() {
+//        return comments;
+//    }
+//
+//    public void setComments(List<Comment> comments) {
+//        this.comments = comments;
+//    }
 }

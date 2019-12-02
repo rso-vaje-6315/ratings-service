@@ -1,2 +1,2 @@
-INSERT INTO ratings(id, timestamp, product_id, rating_number, comments) VALUES('e43a479c-3cce-4336-b5d4-f67e0d11c6c2', NOW(), 'a619b29b-319a-4482-8992-b6aa00c5b0eb', 7, {'good', 'average'});
-INSERT INTO ratings(id, timestamp, product_id, rating_number, comments) VALUES('c9ac4ebf-b312-4875-b1ed-f8e122079f97', NOW(), '116640f1-0aa7-4321-9efc-2a9718a4e2f9', 1, {'bad', 'terrible'});
+INSERT INTO ratings(id, timestamp, product_id, rating_number) VALUES('e43a479c-3cce-4336-b5d4-f67e0d11c6c2', NOW(), 'a619b29b-319a-4482-8992-b6aa00c5b0eb', 7);
+INSERT INTO ratings(id, timestamp, product_id, rating_number) VALUES('c9ac4ebf-b312-4875-b1ed-f8e122079f97', NOW(), '116640f1-0aa7-4321-9efc-2a9718a4e2f9', 1);

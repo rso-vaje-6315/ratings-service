@@ -9,7 +9,7 @@ public class RatingMapper {
         Rating rating = new Rating();
         rating.setId(entity.getId());
         rating.setTimestamp(entity.getTimestamp());
-        rating.setComments(entity.getComments());
+        //rating.setComments(entity.getComments());
         rating.setRatingNumber(entity.getRatingNumber());
         rating.setProductId(entity.getProductId());
         return rating;

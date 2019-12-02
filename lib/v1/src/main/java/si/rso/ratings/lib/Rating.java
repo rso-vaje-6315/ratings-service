@@ -8,7 +8,7 @@ public class Rating extends BaseType {
     
     private int ratingNumber;
     
-    private List<Comment> comments;
+    //private List<Comment> comments;
 
     public String getProductId() {
         return productId;
@@ -26,11 +26,11 @@ public class Rating extends BaseType {
         this.ratingNumber = ratingNumber;
     }
 
-    public List<Comment> getComments() {
-        return comments;
-    }
-
-    public void setComments(List<Comment> comments) {
-        this.comments = comments;
-    }
+//    public List<Comment> getComments() {
+//        return comments;
+//    }
+//
+//    public void setComments(List<Comment> comments) {
+//        this.comments = comments;
+//    }
 }
