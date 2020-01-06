@@ -25,8 +25,9 @@
         <kumuluzee-openapi.version>1.0.1</kumuluzee-openapi.version>
         <jackson.version>2.9.9</jackson.version>
         <postgres.version>42.2.7</postgres.version>
+        <mongo.version>3.12.0</mongo.version>
         <keycloak.version>7.0.0</keycloak.version>
-        <rso-rest.version>1.3.0-SNAPSHOT</rso-rest.version>
+        <rso-rest.version>1.3.0</rso-rest.version>
     </properties>
 
     <dependencyManagement>
@@ -38,12 +39,12 @@
             </dependency>
             <dependency>
                 <groupId>si.rso.ratings</groupId>
-                <artifactId>persistence</artifactId>
+                <artifactId>services</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>si.rso.ratings</groupId>
-                <artifactId>services</artifactId>
+                <groupId>si.rso.customers</groupId>
+                <artifactId>mongodb</artifactId>
                 <version>${project.version}</version>
             </dependency>
 
@@ -105,10 +106,25 @@
                 <artifactId>keycloak-jetty94-adapter</artifactId>
                 <version>${keycloak.version}</version>
             </dependency>
+        <dependency>
+            <groupId>com.googlecode.json-simple</groupId>
+            <artifactId>json-simple</artifactId>
+            <version>1.1.1</version>
+        </dependency>
             <dependency>
-                <groupId>org.postgresql</groupId>
-                <artifactId>postgresql</artifactId>
-                <version>${postgres.version}</version>
+                <groupId>org.mongodb</groupId>
+                <artifactId>mongodb-driver-sync</artifactId>
+                <version>${mongo.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.mongodb</groupId>
+                <artifactId>mongo-java-driver</artifactId>
+                <version>${mongo.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.hibernate</groupId>
+                <artifactId>hibernate-entitymanager</artifactId>
+                <version>4.2.6.Final</version>
             </dependency>
             <dependency>
                 <groupId>si.rso.rest</groupId>
@@ -142,7 +158,7 @@
                 <module>api</module>
                 <module>lib</module>
                 <module>services</module>
-                <module>persistence</module>
+                <module>mongodb</module>
             </modules>
         </profile>
     </profiles>

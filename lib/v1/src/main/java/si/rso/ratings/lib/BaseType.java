@@ -6,7 +6,7 @@ public class BaseType {
     
     private String id;
     
-    private Date timestamp;
+    //private Date timestamp;
     
     public String getId() {
         return id;
@@ -16,11 +16,11 @@ public class BaseType {
         this.id = id;
     }
     
-    public Date getTimestamp() {
-        return timestamp;
-    }
-    
-    public void setTimestamp(Date timestamp) {
-        this.timestamp = timestamp;
-    }
+//    public Date getTimestamp() {
+//        return timestamp;
+//    }
+//
+//    public void setTimestamp(Date timestamp) {
+//        this.timestamp = timestamp;
+//    }
 }

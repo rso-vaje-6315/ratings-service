@@ -1,14 +1,12 @@
 package si.rso.ratings.lib;
 
-import java.util.List;
-
 public class Rating extends BaseType {
 
     private String productId;
     
     private int ratingNumber;
     
-    //private List<Comment> comments;
+    private String comment;
 
     public String getProductId() {
         return productId;
@@ -26,11 +24,11 @@ public class Rating extends BaseType {
         this.ratingNumber = ratingNumber;
     }
 
-//    public List<Comment> getComments() {
-//        return comments;
-//    }
-//
-//    public void setComments(List<Comment> comments) {
-//        this.comments = comments;
-//    }
+    public String getComment() {
+        return comment;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
+    }
 }

@@ -1,2 +1,6 @@
-INSERT INTO ratings(id, timestamp, product_id, rating_number) VALUES('e43a479c-3cce-4336-b5d4-f67e0d11c6c2', NOW(), 'a619b29b-319a-4482-8992-b6aa00c5b0eb', 7);
-INSERT INTO ratings(id, timestamp, product_id, rating_number) VALUES('c9ac4ebf-b312-4875-b1ed-f8e122079f97', NOW(), '116640f1-0aa7-4321-9efc-2a9718a4e2f9', 1);
+INSERT INTO ratings(id, timestamp, product_id, rating_number, comment) VALUES('e43a479c-3cce-4336-b5d4-f67e0d11c6c2', NOW(), 'a619b29b-319a-4482-8992-b6aa00c5b0eb', 4, 'great product');
+INSERT INTO ratings(id, timestamp, product_id, rating_number, comment) VALUES('cac1690d-dd2f-4746-a771-cb2f59de620b', NOW(), 'a619b29b-319a-4482-8992-b6aa00c5b0eb', 5, 'like it');
+INSERT INTO ratings(id, timestamp, product_id, rating_number, comment) VALUES('35fdf55e-3b52-43c2-85fc-a750938d4bea', NOW(), 'a619b29b-319a-4482-8992-b6aa00c5b0eb', 5, 'impressive');
+INSERT INTO ratings(id, timestamp, product_id, rating_number, comment) VALUES('fda81c17-1017-4187-b9ed-e7d90eee885b', NOW(), '116640f1-0aa7-4321-9efc-2a9718a4e2f9', 1, 'terrible product');
+INSERT INTO ratings(id, timestamp, product_id, rating_number, comment) VALUES('c18771ee-775b-4fa6-ad5c-2c63273e263a', NOW(), '116640f1-0aa7-4321-9efc-2a9718a4e2f9', 2, 'not what I expected');
+INSERT INTO ratings(id, timestamp, product_id, rating_number, comment) VALUES('c9ac4ebf-b312-4875-b1ed-f8e122079f97', NOW(), 'f4a8997d-b032-48c4-8ed9-3938e3f7e617', 2, 'quite bad product');
