@@ -1,6 +1,7 @@
 package si.rso.ratings.api.endpoints;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.kumuluz.ee.logs.cdi.Log;
+import org.eclipse.microprofile.metrics.annotation.Timed;
 import si.rso.ratings.lib.AverageRating;
 import si.rso.ratings.lib.Rating;
 import si.rso.ratings.services.RatingService;
@@ -14,6 +15,7 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 import java.util.List;
 
+@Log
 @Path("/ratings")
 @RequestScoped
 @Produces(MediaType.APPLICATION_JSON)
@@ -28,6 +30,7 @@ public class RatingsEndpoint {
     
     @GET
     @Path("/{productId}")
+    @Timed(name = "all-product-ratings-query-time")
     public Response getProductRatings(@PathParam("productId") String productId) {
         List<Rating> ratings = ratingService.getProductRatings(productId);
         return Response.ok(ratings).build();
@@ -42,6 +45,7 @@ public class RatingsEndpoint {
 
     @GET
     @Path("/averageStarRating/{productId}")
+    @Timed(name = "average-rating-query-time")
     public Response getAverageNumberProductRating(@PathParam("productId") String productId) {
         AverageRating averageRating = ratingService.getAverageRating(productId);
         return Response.ok(averageRating).build();
@@ -49,6 +53,7 @@ public class RatingsEndpoint {
 
     @POST
     @Path("/")
+    @Timed(name = "rating-addition-time")
     public Response addRating(Rating rating) {
         try {
             Rating newRating = ratingService.addRating(rating);
@@ -60,6 +65,7 @@ public class RatingsEndpoint {
 
     @DELETE
     @Path("/{ratingId}")
+    @Timed(name = "rating-removal-time")
     public Response removeRating(@PathParam("ratingId") String ratingId) {
         try {
             Boolean ratingRemoved = ratingService.removeRating(ratingId);

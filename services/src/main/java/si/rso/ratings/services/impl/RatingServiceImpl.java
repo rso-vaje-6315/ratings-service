@@ -2,6 +2,8 @@ package si.rso.ratings.services.impl;
 
 import org.bson.Document;
 import org.bson.types.ObjectId;
+import org.eclipse.microprofile.faulttolerance.CircuitBreaker;
+import org.eclipse.microprofile.faulttolerance.Timeout;
 import si.rso.ratings.lib.AverageRating;
 import si.rso.ratings.mongodb.MongoService;
 import si.rso.ratings.services.RatingService;
@@ -20,7 +22,9 @@ public class RatingServiceImpl implements RatingService {
 
     @Inject
     private MongoService mongoService;
-    
+
+    @Timeout
+    @CircuitBreaker
     @Override
     public List<Rating> getProductRatings(String productId){
         Document document = new Document();
@@ -29,6 +33,8 @@ public class RatingServiceImpl implements RatingService {
         return ratings;
     }
 
+    @Timeout
+    @CircuitBreaker
     @Override
     public List<Rating> generateProductRatings(){
         Document document = new Document();
@@ -50,12 +56,16 @@ public class RatingServiceImpl implements RatingService {
         return ratings;
     }
 
+    @Timeout
+    @CircuitBreaker
     @Override
     public AverageRating getAverageRating(String productId) {
         AverageRating averageRating = mongoService.getAverageRating(productId);
         return averageRating;
     }
 
+    @Timeout
+    @CircuitBreaker
     @Override
     @Transactional
     public Rating addRating(Rating rating) {
@@ -67,6 +77,8 @@ public class RatingServiceImpl implements RatingService {
         return rating;
     }
 
+    @Timeout
+    @CircuitBreaker
     @Override
     @Transactional
     public Boolean removeRating(String ratingId){

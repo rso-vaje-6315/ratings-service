@@ -31,20 +31,17 @@ kumuluzee:
       disk-space-health-check:
         threshold: 100000000
         type: liveness
+  metrics:
+    web-instrumentation:
+      - name: ratings-endpoint
+        url-pattern: /v1/ratings/*
 #  datasources:
 #    - jndi-name: jdbc/mainDB
-#      connection-url: jdbc:postgresql://localhost:5432/ratings-service
-#      username: postgres
-#      password: gregor
+#      connection-url: jdbc:mongodb://localhost:27017/ratings-service
+#      username: not_set
+#      password: not_set
 #      pool:
 #        max-size: 20
-  datasources:
-    - jndi-name: jdbc/mainDB
-      connection-url: jdbc:mongodb://localhost:27017/ratings-service
-      username: not_set
-      password: not_set
-      pool:
-        max-size: 20
   security:
     keycloak:
       json: '{
@@ -59,6 +56,6 @@ mongo:
   username: mongo
   password: mongo
   host: localhost
-  port: 27018
+  port: 27017
   database: db
   default-collection: ratings-service
