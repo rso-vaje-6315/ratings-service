@@ -34,6 +34,13 @@ public class RatingsEndpoint {
     }
 
     @GET
+    @Path("/generate")
+    public Response getProductRatings() {
+        List<Rating> ratings = ratingService.generateProductRatings();
+        return Response.ok(ratings).build();
+    }
+
+    @GET
     @Path("/averageStarRating/{productId}")
     public Response getAverageNumberProductRating(@PathParam("productId") String productId) {
         AverageRating averageRating = ratingService.getAverageRating(productId);

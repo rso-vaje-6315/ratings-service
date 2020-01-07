@@ -9,6 +9,8 @@ public interface RatingService {
     
     List<Rating> getProductRatings(String productId);
 
+    List<Rating> generateProductRatings();
+
     AverageRating getAverageRating(String productId);
 
     Rating addRating(Rating rating);

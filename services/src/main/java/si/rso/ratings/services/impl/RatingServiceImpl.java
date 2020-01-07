@@ -30,6 +30,27 @@ public class RatingServiceImpl implements RatingService {
     }
 
     @Override
+    public List<Rating> generateProductRatings(){
+        Document document = new Document();
+        document.put("productId", "caa08db8-b2c3-43e8-b419-542126b841bd");
+        document.put("ratingNumber", 1);
+        document.put("comment", "terrible product");
+        mongoService.insertDocument(document);
+
+        document = new Document();
+        document.put("productId", "caa08db8-b2c3-43e8-b419-542126b841bd");
+        document.put("ratingNumber", 2);
+        document.put("comment", "just bad");
+        mongoService.insertDocument(document);
+
+        document = new Document();
+        document.put("productId", "caa08db8-b2c3-43e8-b419-542126b841bd");
+        List<Rating> ratings = mongoService.getDocument(document);
+
+        return ratings;
+    }
+
+    @Override
     public AverageRating getAverageRating(String productId) {
         AverageRating averageRating = mongoService.getAverageRating(productId);
         return averageRating;

@@ -82,7 +82,7 @@ public class MongoService {
                 Aggregates.match(Filters.eq("productId", productId)),
                 Aggregates.group("$avg", Accumulators.avg("ratingNumber", "$ratingNumber"))
         ));
-        if (doc == null) {
+        if (doc == null || doc.first() == null) {
             return null;
         }
         AverageRating averageRating = new AverageRating();
