@@ -1,5 +1,7 @@
 package si.rso.ratings.api.endpoints;
 
+import com.kumuluz.ee.logs.LogManager;
+import com.kumuluz.ee.logs.Logger;
 import com.kumuluz.ee.logs.cdi.Log;
 import org.eclipse.microprofile.metrics.annotation.Timed;
 import si.rso.ratings.lib.AverageRating;
@@ -21,7 +23,7 @@ import java.util.List;
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 public class RatingsEndpoint {
-    
+
     @Inject
     private RatingService ratingService;
     
