@@ -3,6 +3,7 @@ package si.rso.ratings.services.impl;
 import org.bson.Document;
 import org.bson.types.ObjectId;
 import org.eclipse.microprofile.faulttolerance.CircuitBreaker;
+import org.eclipse.microprofile.faulttolerance.Retry;
 import org.eclipse.microprofile.faulttolerance.Timeout;
 import si.rso.ratings.lib.AverageRating;
 import si.rso.ratings.mongodb.MongoService;
@@ -23,6 +24,7 @@ public class RatingServiceImpl implements RatingService {
     @Inject
     private MongoService mongoService;
 
+    @Retry
     @Timeout
     @CircuitBreaker
     @Override
@@ -33,6 +35,7 @@ public class RatingServiceImpl implements RatingService {
         return ratings;
     }
 
+    @Retry
     @Timeout
     @CircuitBreaker
     @Override
@@ -56,6 +59,7 @@ public class RatingServiceImpl implements RatingService {
         return ratings;
     }
 
+    @Retry
     @Timeout
     @CircuitBreaker
     @Override
@@ -64,6 +68,7 @@ public class RatingServiceImpl implements RatingService {
         return averageRating;
     }
 
+    @Retry
     @Timeout
     @CircuitBreaker
     @Override
@@ -77,6 +82,7 @@ public class RatingServiceImpl implements RatingService {
         return rating;
     }
 
+    @Retry
     @Timeout
     @CircuitBreaker
     @Override

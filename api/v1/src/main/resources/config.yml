@@ -55,13 +55,6 @@ kumuluzee:
     web-instrumentation:
       - name: ratings-endpoint
         url-pattern: /v1/ratings/*
-#  datasources:
-#    - jndi-name: jdbc/mainDB
-#      connection-url: jdbc:mongodb://localhost:27017/ratings-service
-#      username: not_set
-#      password: not_set
-#      pool:
-#        max-size: 20
   security:
     keycloak:
       json: '{
@@ -79,3 +72,6 @@ mongo:
   port: 27017
   database: db
   default-collection: ratings-service
+
+service-config:
+  maintenance: false
