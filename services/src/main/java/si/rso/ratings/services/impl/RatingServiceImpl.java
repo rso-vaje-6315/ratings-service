@@ -12,14 +12,11 @@ import si.rso.ratings.lib.Rating;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
-import javax.persistence.*;
 import javax.transaction.Transactional;
 import java.util.List;
 
 @ApplicationScoped
 public class RatingServiceImpl implements RatingService {
-
-    private EntityManager em;
 
     @Inject
     private MongoService mongoService;
