@@ -52,6 +52,22 @@ public class MongoService {
         defaultCollection.insertOne(document);
 
     }
+    
+    public void checkStatus() {
+        if (!databaseExists(config.getDatabase())) {
+            throw new RuntimeException("Mongo not connected!");
+        }
+    }
+    
+    public boolean databaseExists(String database) {
+        if (client != null && database != null) {
+            for (String s : client.listDatabaseNames()) {
+                if (s.equals(database))
+                    return true;
+            }
+        }
+        return false;
+    }
 
     public void removeDocument(Document document) {
         if (document == null) return;
