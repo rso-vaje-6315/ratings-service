@@ -1,6 +1,8 @@
 package si.rso.ratings.mongodb;
 import java.util.*;
 
+import com.kumuluz.ee.logs.LogManager;
+import com.kumuluz.ee.logs.Logger;
 import com.mongodb.*;
 import com.mongodb.client.*;
 import com.mongodb.client.MongoClient;
@@ -18,6 +20,9 @@ import javax.inject.Inject;
 
 @ApplicationScoped
 public class MongoService {
+    
+    private static final Logger LOG = LogManager.getLogger(MongoService.class.getSimpleName());
+    
     private static MongoDatabase database = null;
     private static MongoClient client = null;
     private static MongoCollection defaultCollection = null;
@@ -61,7 +66,9 @@ public class MongoService {
     
     public boolean databaseExists(String database) {
         if (client != null && database != null) {
+            LOG.info("Checking databases...");
             for (String s : client.listDatabaseNames()) {
+                LOG.info("Found database {}", s);
                 if (s.equals(database))
                     return true;
             }
