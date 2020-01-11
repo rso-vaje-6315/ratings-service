@@ -7,13 +7,13 @@ import java.util.List;
 
 public interface RatingService {
     
+    Rating getRating(String ratingId);
+    
     List<Rating> getProductRatings(String productId);
-
-    List<Rating> generateProductRatings();
 
     AverageRating getAverageRating(String productId);
 
     Rating addRating(Rating rating);
 
-    Boolean removeRating(String ratingId);
+    void removeRating(String ratingId);
 }

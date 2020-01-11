@@ -18,7 +18,7 @@ public class MongoHealthCheck implements HealthCheck {
     @Override
     public HealthCheckResponse call() {
         try {
-            mongoService.checkStatus();
+            mongoService.healtcheck();
         } catch (Exception e) {
             return HealthCheckResponse.named("MongoHealthCheck").down().build();
         }

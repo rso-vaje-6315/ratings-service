@@ -1,22 +1,23 @@
 package si.rso.ratings.mongodb;
-import java.util.*;
 
 import com.kumuluz.ee.logs.LogManager;
 import com.kumuluz.ee.logs.Logger;
-import com.mongodb.*;
+import com.mongodb.MongoClientSettings;
+import com.mongodb.MongoCredential;
+import com.mongodb.ServerAddress;
 import com.mongodb.client.*;
-import com.mongodb.client.MongoClient;
-import com.mongodb.client.model.Accumulators;
-import com.mongodb.client.model.Aggregates;
-import com.mongodb.client.model.Filters;
 import org.bson.Document;
-import si.rso.ratings.lib.AverageRating;
-import si.rso.ratings.lib.Rating;
+import org.bson.conversions.Bson;
+import org.bson.types.ObjectId;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
+import java.util.Collections;
+import java.util.List;
+
+import static com.mongodb.client.model.Filters.eq;
 
 @ApplicationScoped
 public class MongoService {
@@ -25,92 +26,89 @@ public class MongoService {
     
     private static MongoDatabase database = null;
     private static MongoClient client = null;
-    private static MongoCollection defaultCollection = null;
-
+    
     @Inject
     private MongoConfig config;
-
+    
     private void connect() {
         MongoCredential credential = MongoCredential.createCredential(config.getUsername(), "admin", config.getPassword().toCharArray());
         client = MongoClients.create(
-                MongoClientSettings.builder()
-                        .applyToClusterSettings(builder ->
-                                builder.hosts(Collections.singletonList(new ServerAddress(config.getHost(), config.getPort()))))
-                        .credential(credential)
-                        .build());
+            MongoClientSettings.builder()
+                .applyToClusterSettings(builder ->
+                    builder.hosts(Collections.singletonList(new ServerAddress(config.getHost(), config.getPort()))))
+                .credential(credential)
+                .build());
         database = client.getDatabase(config.getDatabase());
-        defaultCollection = database.getCollection(config.getDefaultCollection());
     }
-
+    
     @PostConstruct
-    private void init () {
+    private void init() {
         connect();
     }
-
+    
     @PreDestroy
     private void closeConnection() {
         client.close();
     }
-
+    
+    public void insertDocument(Document document, String collection) {
+        if (document == null) {
+            return;
+        }
+        database.getCollection(collection).insertOne(document);
+    }
+    
     public void insertDocument(Document document) {
-        if (document == null) return;
-        defaultCollection.insertOne(document);
-
+        this.insertDocument(document, config.getDefaultCollection());
     }
     
-    public void checkStatus() {
-        if (!databaseExists(config.getDatabase())) {
-            throw new RuntimeException("Mongo not connected!");
-        }
+    public void cleanData(String collection) {
+        database.getCollection(collection).deleteMany(new Document());
     }
     
-    public boolean databaseExists(String database) {
-        if (client != null && database != null) {
-            LOG.info("Checking databases...");
-            for (String s : client.listDatabaseNames()) {
-                LOG.info("Found database {}", s);
-                if (s.equals(database))
-                    return true;
-            }
-        }
-        return false;
+    public void cleanData() {
+        this.cleanData(config.getDefaultCollection());
     }
-
+    
+    public void removeDocument(Document document, String collection) {
+        if (document == null) {
+            return;
+        }
+        database.getCollection(collection).deleteOne(document);
+    }
+    
     public void removeDocument(Document document) {
-        if (document == null) return;
-        defaultCollection.deleteOne(document);
+        this.removeDocument(document, config.getDefaultCollection());
     }
-
-    public List<Rating> getDocument(Document document) {
-        if (document == null) return null;
-        List<Rating> ratings = new LinkedList<Rating>();
-        MongoCursor<Document> cursor = defaultCollection.find(document).iterator();
-        if (cursor == null) {
-            return null;
-        }
-        while (cursor.hasNext()) {
-            Document doc = cursor.next();
-            Rating rating = new Rating();
-            rating.setId(doc.getObjectId(("_id")).toString());
-            rating.setComment(doc.getString("comment"));
-            rating.setRatingNumber(doc.getInteger("ratingNumber"));
-            rating.setProductId(doc.getString("productId"));
-            ratings.add(rating);
-        }
-        return ratings;
+    
+    public Document getDocument(String documentId, String collection) {
+        return database
+            .getCollection(collection)
+            .find(eq("_id", new ObjectId(documentId)))
+            .first();
     }
-
-    public AverageRating getAverageRating(String productId) {
-        AggregateIterable<Document> doc = defaultCollection.aggregate(Arrays.asList(
-                Aggregates.match(Filters.eq("productId", productId)),
-                Aggregates.group("$avg", Accumulators.avg("ratingNumber", "$ratingNumber"))
-        ));
-        if (doc == null || doc.first() == null) {
-            return null;
-        }
-        AverageRating averageRating = new AverageRating();
-        averageRating.setProductId(productId);
-        averageRating.setAverageRatingNumber(doc.first().getDouble("ratingNumber"));
-        return averageRating;
+    
+    public Document getDocument(String documentId) {
+        return this.getDocument(documentId, config.getDefaultCollection());
+    }
+    
+    public MongoCursor<Document> getDocuments(Document document) {
+        return this.getDocuments(document, config.getDefaultCollection());
+    }
+    
+    public MongoCursor<Document> getDocuments(Document document, String collection) {
+        return database.getCollection(collection).find(document).iterator();
+    }
+    
+    public AggregateIterable<Document> getAggregatedData(List<Bson> aggregateBy, String collection) {
+        return database.getCollection(collection).aggregate(aggregateBy);
+    }
+    
+    public AggregateIterable<Document> getAggregatedData(List<Bson> aggregateBy) {
+        return this.getAggregatedData(aggregateBy, config.getDefaultCollection());
+    }
+    
+    public void healtcheck() {
+        database.getCollection(config.getDefaultCollection()).find(new Document()).limit(1);
     }
 }

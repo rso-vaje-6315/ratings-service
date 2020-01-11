@@ -45,9 +45,6 @@ kumuluzee:
       mapping: /health/
       enabled: true
     checks:
-      data-source-health-check:
-        type: liveness
-        jndi-name: jdbc/mainDB
       disk-space-health-check:
         threshold: 100000000
         type: liveness
@@ -72,6 +69,5 @@ mongo:
   port: 27017
   database: db
   default-collection: ratings-service
-
 service-config:
   maintenance: false

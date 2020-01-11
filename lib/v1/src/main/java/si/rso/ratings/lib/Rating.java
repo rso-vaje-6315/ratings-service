@@ -1,6 +1,11 @@
 package si.rso.ratings.lib;
 
 public class Rating extends BaseType {
+    
+    public static final String FIELD_PRODUCT_ID = "productId";
+    public static final String FIELD_ID = "_id";
+    public static final String FIELD_RATING_NUM = "ratingNumber";
+    public static final String FIELD_COMMENT = "comment";
 
     private String productId;
     
