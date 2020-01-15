@@ -67,6 +67,48 @@ public class AdminServiceImpl implements AdminService {
         document.put(Rating.FIELD_RATING_NUM, 3);
         document.put(Rating.FIELD_COMMENT, "Average");
         mongoService.insertDocument(document);
+
+        productId = "89ed42e1-cde9-4495-a838-6011ce71e08c";
+        document = new Document();
+        document.put(Rating.FIELD_PRODUCT_ID, productId);
+        document.put(Rating.FIELD_RATING_NUM, 3);
+        document.put(Rating.FIELD_COMMENT, "Average");
+        mongoService.insertDocument(document);
+
+        productId = "c1ef6f2c-4a21-477d-b429-aea2abfcc811";
+        document = new Document();
+        document.put(Rating.FIELD_PRODUCT_ID, productId);
+        document.put(Rating.FIELD_RATING_NUM, 3);
+        document.put(Rating.FIELD_COMMENT, "Average");
+        mongoService.insertDocument(document);
+
+        productId = "8d8c9560-24b2-46bb-a84e-33a83b411e14";
+        document = new Document();
+        document.put(Rating.FIELD_PRODUCT_ID, productId);
+        document.put(Rating.FIELD_RATING_NUM, 3);
+        document.put(Rating.FIELD_COMMENT, "Average");
+        mongoService.insertDocument(document);
+
+        productId = "5508d970-94e2-4626-827b-4952b63696d6";
+        document = new Document();
+        document.put(Rating.FIELD_PRODUCT_ID, productId);
+        document.put(Rating.FIELD_RATING_NUM, 3);
+        document.put(Rating.FIELD_COMMENT, "Average");
+        mongoService.insertDocument(document);
+
+        productId = "8b5b7307-9dbe-40b3-b0b7-592ff7e6604f";
+        document = new Document();
+        document.put(Rating.FIELD_PRODUCT_ID, productId);
+        document.put(Rating.FIELD_RATING_NUM, 3);
+        document.put(Rating.FIELD_COMMENT, "Average");
+        mongoService.insertDocument(document);
+
+        productId = "862d89c4-34b2-4831-b400-474fb89b8a51";
+        document = new Document();
+        document.put(Rating.FIELD_PRODUCT_ID, productId);
+        document.put(Rating.FIELD_RATING_NUM, 3);
+        document.put(Rating.FIELD_COMMENT, "Average");
+        mongoService.insertDocument(document);
     
         return ratingService.getProductRatings(productId);
     }
